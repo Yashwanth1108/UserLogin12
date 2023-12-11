@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Login</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+      integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <!-- Remove the inner <form> -->
+    <form class="login_form">
+      <div class="container">
+        <div class="form-box">
+          <h1 id="title">Sign Up</h1>
+          <div class="input-group">
+            <div class="input-field" id="nameField">
+              <i class="fa-solid fa-user"></i>
+              <input type="text" id="name" placeholder="Name" />
+            </div>
+            <div class="input-field">
+              <i class="fa-solid fa-envelope"></i>
+              <input type="email" id="email" placeholder="Email" size="30" />
+            </div>
+            <div class="input-field">
+              <i class="fa-solid fa-lock"></i>
+              <input type="password" id="password" placeholder="Password" />
+            </div>
+            <p>Lost Password <a href="#">Click here</a></p>
+          </div>
+          <div class="btn-field">
+            <button type="button" id="signUpBtn">SIGN UP</button>
+            <button type="button" id="signInBtn" class="disable">
+              SIGN IN
+            </button>
+          </div>
+        </div>
+      </div>
+    </form>
+    <script src="script.js"></script>
+
+    <!-- <script src="script.js"></script> -->
+  </body>
+</html>
