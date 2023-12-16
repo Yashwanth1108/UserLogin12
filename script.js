@@ -1,98 +1,72 @@
+const users = [
+  { name: "User1", email: "user1@example.com", password: "password1" },
+  { name: "User2", email: "user2@example.com", password: "password2" },
+  // Add more users as needed
+];
+
 let signUpBtn = document.getElementById("signUpBtn");
 let signInBtn = document.getElementById("signInBtn");
 let nameField = document.getElementById("nameField");
 let title = document.getElementById("title");
-let nameInput = document.getElementById("name"); // Add this line
-let emailInput = document.getElementById("email"); // Add this line
-let passwordInput = document.getElementById("password"); // Add this line
 
-signInBtn.addEventListener("click", () => {
-  nameField.style.display = "none";
+signInBtn.onclick = function () {
+  nameField.style.maxHeight = "0";
   title.innerHTML = "Sign In";
-  signInBtn.classList.remove("disable");
   signUpBtn.classList.add("disable");
-});
+  signInBtn.classList.remove("disable");
+};
 
-signUpBtn.addEventListener("click", () => {
-  nameField.style.maxHeight = "65px"; // Change this line
+signUpBtn.onclick = function () {
+  nameField.style.maxHeight = "65px";
   title.innerHTML = "Sign Up";
   signUpBtn.classList.remove("disable");
   signInBtn.classList.add("disable");
+};
+
+// Function to handle user login
+function loginUser(email, password) {
+  const user = users.find((u) => u.email === email && u.password === password);
+  return user;
+}
+
+// Function to display welcome message after successful login
+function displayWelcomeMessage(user) {
+  const container = document.querySelector(".container");
+  container.innerHTML = `
+<div class="form-box">
+  <h1>Welcome, ${user.name}!</h1>
+  <p>You are successfully logged in.</p>
+</div>
+`;
+}
+
+// Event listener for the Sign Up button
+signUpBtn.addEventListener("click", function () {
+  // Get user input
+  const name = document.getElementById("name").value;
+  const email = document.getElementById("email").value;
+  const password = document.getElementById("password").value;
+
+  // Add new user to the users array (replace this with your user registration logic)
+  users.push({ name, email, password });
+
+  // Display welcome message for the new user
+  displayWelcomeMessage({ name, email });
 });
 
-const users = [
-  { name: "yash", email: abcgmail.com, password: "pass1", grade: "A" },
-  { name: "user2", email: abcgmail.com, password: "pass2", grade: "B" },
-  { name: "user3", email: abcgmail.com, password: "pass3", grade: "C" },
-];
+// Event listener for the Sign In button
+signInBtn.addEventListener("click", function () {
+  // Get user input
+  const email = document.getElementById("email").value;
+  const password = document.getElementById("password").value;
 
-function login() {
-  const usernameInput = document.getElementById("name").value;
-  const passwordInput = document.getElementById("password").value;
+  // Attempt to login
+  const loggedInUser = loginUser(email, password);
 
-  const user = users.find(
-    (u) => u.username === usernameInput && u.password === passwordInput
-  );
-
-  if (user) {
-    showProfile(user);
+  // Display welcome message if login is successful
+  if (loggedInUser) {
+    displayWelcomeMessage(loggedInUser);
   } else {
-    alert("Invalid username or password");
+    alert("Invalid email or password. Please try again.");
   }
-}
-
-function showProfile(user) {
-  const loginContainer = document.getElementById("input-group");
-  const profileContainer = document.getElementById("profile-container");
-  const profileUsername = document.getElementById("profile-username");
-  const profileGrade = document.getElementById("profile-grade");
-
-  loginContainer.style.display = "none";
-  profileContainer.style.display = "block";
-
-  profileUsername.textContent = "Username: " + user.username;
-  profileGrade.textContent = "Grade: " + user.grade;
-}
-
-function showExamResult() {
-  const user = users.find(
-    (u) =>
-      u.username ===
-      document.getElementById("profile-username").textContent.split(": ")[1]
-  );
-  alert("Exam Result: Your grade is " + user.grade);
-}
-
-// signUpBtn.addEventListener("click", signUp);
-// // Add the login functionality
-// signInBtn.addEventListener("click", login);
-
-// function signUp() {
-//   // Get user data
-//   const name = nameInput.value;
-//   const email = emailInput.value;
-//   const password = passwordInput.value;
-
-//   // Store user data in localStorage (you might want a more secure solution)
-//   localStorage.setItem("user", JSON.stringify({ name, email, password }));
-
-//   // Redirect to the welcome page
-
-//   // Prevent form submission (you can remove this if you want the form to submit)
-//   return false;
-// }
-
-// function login() {
-//   let userData = localStorage.getItem("user");
-
-//   const { name, email, password } = userData;
-//   if (userData) {
-//     console.log("Login sucessfull.");
-//     window.location.href = "home.html";
-//   }
-
-//   // Implement login functionality here
-//   // You can check the entered email and password against stored data
-//   // and redirect to the welcome page if credentials are valid
-//   // For simplicity, let's just log a message for now
-// }
+});
